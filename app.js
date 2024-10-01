@@ -18,8 +18,8 @@ const getLandmarks = () => {
 
 app.get('/', (req, res) => {
     const cities = getCities(); // Reading cities data
-    console.log(cities);
-    console.log("hi")
+    // console.log(cities);
+    // console.log("hi")
     
     // Send HTML file as response
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -40,9 +40,77 @@ app.get("/api/cities/:id", (req, res) => {
     if (!city) {
         return res.status(404).json({ message: "City not found" });
     }
-
     return res.json(city);
 });
+
+
+
+app.get("/api/adminAdd", (req, res) => {
+    if (req.query.password === "321123"){
+        let cities = getCities();
+        let id = cities.length + 1;
+        let city = req.query.city || "null";
+        let country = req.query.country || "null";
+        let population = req.query.population? parseInt(req.query.population) : 0;
+
+        const newCity = { id, name, country, population };
+
+        cities.push(newCity);
+
+        fs.writeFileSync(path.join(__dirname, "data/cities.json"), JSON.stringify(cities, null, 2));
+        console.log(name)
+        console.log("password is correct");
+        res.json("hi")
+
+    }else{
+        console.log("password is incorrect");
+        res.status(401).json({ message: "Invalid password" });
+    }
+});
+
+
+// app.get("/api/searchCities/:query", (req, res) => {
+//     const { search } = req.query;
+//     let cities = getCities();
+//     let Place = "bob"
+//     // console.log(cities);
+//     console.log(Place);
+
+
+//     if (search) {
+//         cities = cities.filter(city => {
+//             Place = city.name.toLowerCase().startsWith(search.toLowerCase());
+//             // console.log(Place);
+//             // res.status(200).json(Place);
+//         });
+//     }
+//     else{
+//         res.status(404)
+//     }
+
+//     res.status(200).json(Place);
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get("/api/landmarks", (req, res) => {
     const landmarks = getLandmarks();
@@ -62,11 +130,13 @@ app.get("/api/landmarks/:id", (req, res) => {
 });
 
 
+app.get("/admin/", (req, res) => {
+    res
+})
+
 
 // Start the server
 app.listen(port, () => {
-    const cities = getCities(); 
-    console.log(cities);
 
     console.log(`Server running on port ${port}`);
 });
