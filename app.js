@@ -5,6 +5,7 @@ const app = express();
 const port = 5001;
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
 
 const getCities = () => {
     const data = fs.readFileSync(path.join(__dirname, '/data/cities.json'), 'utf8');
@@ -43,22 +44,69 @@ app.get("/api/cities/:id", (req, res) => {
     return res.json(city);
 });
 
+app.post("/admin", (req,res)=>{
+    if(req.body.password === "1"){
+        console.log("great")
+        res.status(202).json("City created")
+        if(req.body.cities){
+            res.status(202).json("City created")
+
+        }
+        if(req.body.landmarks){
+            res.status(202).json("Landmark created")
+
+        }
+    }
+    else{
+        res.status(404).json("Wrong Password")
+        console.log("bad")
+    }
+})
 
 
-app.get("/api/adminAdd", (req, res) => {
+
+
+
+
+
+app.get("/api/admin", (req, res) => {
     if (req.query.password === "321123"){
-        let cities = getCities();
-        let id = cities.length + 1;
-        let city = req.query.city || "null";
-        let country = req.query.country || "null";
-        let population = req.query.population? parseInt(req.query.population) : 0;
+        switch(res.query.method){
+            case "cityAdd":
+                break;
+            case "landmarkAdd":
+                break;
+        }
 
-        const newCity = { id, name, country, population };
 
-        cities.push(newCity);
 
-        fs.writeFileSync(path.join(__dirname, "data/cities.json"), JSON.stringify(cities, null, 2));
-        console.log(name)
+
+
+
+
+
+
+
+
+
+
+
+
+        if(res.query.method === "addCity"){
+            let cities = getCities();
+            let id = cities.length + 1;
+            let city = req.query.city || "null";
+            let country = req.query.country || "null";
+            let population = req.query.population? parseInt(req.query.population) : 0;
+    
+            const newCity = { id, city, country, population };
+    
+            cities.push(newCity);
+    
+            fs.writeFileSync(path.join(__dirname, "data/cities.json"), JSON.stringify(cities, null, 2));
+        }
+
+
         console.log("password is correct");
         res.json("hi")
 

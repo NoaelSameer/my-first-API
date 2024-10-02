@@ -9,4 +9,25 @@
 <body>
     <h1>Home page</h1><a href='/api/cities'>Cities</a>
     <a href='/api/landmarks'>landmarks</a></body>
+    <section>
+        <fieldset class="h-[60vh] w-[40vw] bg-gray-400">
+            <form action="/admin" method="post">
+                <h2 class="text-center">Admin Form</h2>
+                <input type="password" name="password" placeholder="Admin Password" required>
+                <input type="radio" name="cities" value="City">
+                <label for="Cities">City</label>
+                <input type="radio" name="landmarks" value="landmark">
+                <label for="landmarks">Landmark</label>
+                <input type="text" placeholder="Landmark/City name">
+                <input type="text" placeholder="Landmark/City name">
+                <input type="text">
+
+                 <!-- <input type="number" name="numberr" placeholder="Card number">
+                 <input type="text" name="date" placeholder="date">
+                 <input type -->
+                <button type="submit" class="h-[10vh] w-[7vw] bg-slate-500">Submit</button>
+            </form>
+        </fieldset>
+    </section>
+    
 </html>
