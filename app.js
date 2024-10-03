@@ -44,81 +44,117 @@ app.get("/api/cities/:id", (req, res) => {
     return res.json(city);
 });
 
-app.post("/admin", (req,res)=>{
+app.post("/admin/add", (req,res)=>{
+    
     if(req.body.password === "1"){
-        console.log("great")
-        res.status(202).json("City created")
-        if(req.body.cities){
+        if(req.body.typer == "city"){
+            let cities = getCities();
+            let city = {
+                id: cities.length + 1,
+                name: req.body.first,
+                country: req.body.second,
+                population: parseInt(req.body.third),
+            }
+            fs.writeFileSync(path.join(__dirname, '/data/cities.json'), JSON.stringify(cities, null, 2));
             res.status(202).json("City created")
 
         }
-        if(req.body.landmarks){
+        if(req.body.typer == "landmark"){
+            let landmarks = getLandmarks();
+            let landmark = {
+                id: landmarks.length + 1,
+                name: req.body.first,
+                type: req.body.second,
+                city_id: parseInt(req.body.third)
+            }
+            landmarks.push(landmark)
+            fs.writeFileSync(path.join(__dirname, '/data/landmarks.json'), JSON.stringify(landmarks, null, 2));
+
             res.status(202).json("Landmark created")
 
         }
     }
     else{
         res.status(404).json("Wrong Password")
-        console.log("bad")
     }
 })
 
 
-
-
-
-
-
-app.get("/api/admin", (req, res) => {
-    if (req.query.password === "321123"){
-        switch(res.query.method){
-            case "cityAdd":
-                break;
-            case "landmarkAdd":
-                break;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        if(res.query.method === "addCity"){
+app.post("/admin/delete", (req,res)=>{
+    if(req.body.password == "1"){
+        if(req.body.typer == "city"){
             let cities = getCities();
-            let id = cities.length + 1;
-            let city = req.query.city || "null";
-            let country = req.query.country || "null";
-            let population = req.query.population? parseInt(req.query.population) : 0;
-    
-            const newCity = { id, city, country, population };
-    
-            cities.push(newCity);
-    
-            fs.writeFileSync(path.join(__dirname, "data/cities.json"), JSON.stringify(cities, null, 2));
+            let indexer = cities.findIndex(city => city.id === parseInt(req.body.id));
+            if(indexer!== -1){
+                cities.splice(indexer, 1);
+                fs.writeFileSync(path.join(__dirname, '/data/cities.json'), JSON.stringify(cities, null, 2));
+                res.status(202).json("City deleted")
+            }
+            // console.log(indexer);
+            // console.log(req.body.id);
+        }
+        else{
+            let landmarks = getLandmarks();
+            let indexer = landmarks.findIndex(landmark => landmark.id === parseInt(req.body.id));
+            if(indexer!== -1){
+                landmarks.splice(indexer, 1);
+                fs.writeFileSync(path.join(__dirname, '/data/landmarks.json'), JSON.stringify(landmarks, null, 2));
+                res.status(202).json("Landmark deleted")
+            }
+            // console.log(indexer);
+            // console.log(req.body.id);
+
+
         }
 
-
-        console.log("password is correct");
-        res.json("hi")
-
-    }else{
-        console.log("password is incorrect");
-        res.status(401).json({ message: "Invalid password" });
     }
-});
+    else{
+        res.status(404).json("Wrong Password")
+    }
+
+})
+
+// const fs = require('fs');
+// const path = require('path');
+
+// app.post("/admin/delete", (req, res) => {
+//     if (req.body.password === "1") {
+//         if (req.body.typer === "city") {
+//             let cities = getCities();
+//             let indexer = cities.findIndex(city => city.id === parseInt(req.body.id));
+
+//             if (indexer !== -1) {
+//                 cities.splice(indexer, 1);
+//                 fs.writeFileSync(path.join(__dirname, '/data/cities.json'), JSON.stringify(cities, null, 2));
+//                 return res.status(202).json("City deleted");
+//             } else {
+//                 return res.status(404).json("City not found");
+//             }
+
+//         } else if (req.body.typer === "landmark") {
+//             let landmarks = getLandmarks();
+//             let indexer = landmarks.findIndex(landmark => landmark.id === parseInt(req.body.id));
+
+//             if (indexer !== -1) {
+//                 landmarks.splice(indexer, 1);
+//                 fs.writeFileSync(path.join(__dirname, '/data/landmarks.json'), JSON.stringify(landmarks, null, 2));
+//                 return res.status(202).json("Landmark deleted");
+//             } else {
+//                 return res.status(404).json("Landmark not found");
+//             }
+
+//         } else {
+//             return res.status(400).json("Invalid type specified");
+//         }
+
+//     } else {
+//         return res.status(403).json("Wrong Password");
+//     }
+// });
 
 
 // app.get("/api/searchCities/:query", (req, res) => {
-//     const { search } = req.query;
+//   ap  const { search } = req.query;
 //     let cities = getCities();
 //     let Place = "bob"
 //     // console.log(cities);

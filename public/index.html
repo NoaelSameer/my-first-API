@@ -9,31 +9,51 @@
 <body>
     <h1>Home page</h1><a href='/api/cities'>Cities</a>
     <a href='/api/landmarks'>landmarks</a></body>
-    <section>
-        <div class="grid-cols-2 grid gap-[1vw]">
-        <fieldset class="h-[60vh] w-[40vw] bg-gray-400 grid-cols-2 grid gap-[1vw]">
-            <form action="/admin" method="post">
-                <h2 class="text-center">Admin Form</h2>
-                <input type="password" name="password" placeholder="Admin Password" required>
-                <input type="radio" name="cities" value="City">
-                <label for="Cities">City</label>
-                <input type="radio" name="landmarks" value="landmark">
-                <label for="landmarks">Landmark</label>
-                <input type="text" placeholder="Landmark/City name">
-                <input type="text" placeholder="Landmark/City name">
-                <input type="text">
-                <div>
-                    <label for="bride_name" class="block mb-2 text-[1.25vw] font-medium text-gray-900">Admin Password</label>
-                    <input name="bride_name" type="text" class="w-full border-solid border-2 border-[#1e0e4b] rounded-md p-2" value="<%= event.bride_name %>" required>
+    <section class="flex justify-center items-center min-h-screen bg-gray-200">
+        <div class="bg-gray-400 p-6 rounded-lg shadow-lg w-[30vw]">
+                    <form action="/admin/add" method="post">
+                    <h2 class="text-center text-xl font-semibold">Admin Forms</h2>
+                <div class="flex flex-col space-y-4">
+                    <h3 class="text-center">Add a City/Landmark</h3>
+                    <input type="password" name="password" placeholder="Admin Password" required class="p-2 rounded border border-gray-600">
+                    <div class="flex space-x-4 mb-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="typer" value="city" class="mr-2">
+                            City
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="typer" value="landmark" class="mr-2">
+                            Landmark
+                        </label>
+                    </div>
+                    
+        
+                    <input type="text" placeholder="Landmark/City Name" name="first" class="p-2 rounded border border-gray-600">
+                    <input type="text" placeholder="Type/Country" name="second" class="p-2 rounded border border-gray-600">
+                    <input type="number" placeholder="CityID/Population" name="third"  class="p-2 rounded border border-gray-600">
+        
+                    <button type="submit" class="h-10 w-full bg-slate-500 text-white rounded hover:bg-slate-600 transition">Submit</button>
+                    </form>
                 </div>
-
-                 <!-- <input type="number" name="numberr" placeholder="Card number">
-                 <input type="text" name="date" placeholder="date">
-                 <input type -->
-                <button type="submit" class="h-[10vh] w-[7vw] bg-slate-500">Submit</button>
-            </form>
-        </fieldset>
+                <form action="admin/delete" method="post">
+                    <h3 class="text-center">Delete a City/Landmark</h3>
+                    <input type="password" name="password" placeholder="Admin Password" required class="p-2 rounded border border-gray-600">
+                    <input type="text" placeholder="Landmark/City ID" name="id" class="p-2 rounded border border-gray-600">
+                    <div class="flex space-x-4 mb-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="typer" value="city" class="mr-2">
+                            City
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="typer" value="landmark" class="mr-2">
+                            Landmark
+                        </label>
+                    </div>
+                    <button type="submit" class="h-10 w-full bg-slate-500 text-white rounded hover:bg-slate-600 transition">Delete</button>
+                </form>
+        </div>
     </section>
+    
 
 
     
