@@ -136,7 +136,7 @@ app.post("/admin/edit", (req, res) => {
                     return res.status(200).json("City updated!")
             }
             else{
-                "invalid ID"
+                res.status(404).json("invalid ID")
             }
         }
         else {
@@ -153,7 +153,7 @@ app.post("/admin/edit", (req, res) => {
                 fs.writeFileSync(path.join(__dirname, "./data/landmarks.json"), JSON.stringify(landmarks, null, 2), 'utf8')
             }
             else{
-                "invalid ID"
+                res.status(404).json("invalid ID")
             }
             res.status(200).json("Landmark updates!")
         }
