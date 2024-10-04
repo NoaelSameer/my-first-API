@@ -11,48 +11,65 @@
     <a href='/api/landmarks'>landmarks</a></body>
     <section class="flex justify-center items-center min-h-screen bg-gray-200">
         <div class="bg-gray-400 p-6 rounded-lg shadow-lg w-[30vw]">
-                    <form action="/admin/add" method="post">
-                    <h2 class="text-center text-xl font-semibold">Admin Forms</h2>
-                <div class="flex flex-col space-y-4">
-                    <h3 class="text-center">Add a City/Landmark</h3>
-                    <input type="password" name="password" placeholder="Admin Password" required class="p-2 rounded border border-gray-600">
-                    <div class="flex space-x-4 mb-4">
-                        <label class="flex items-center">
-                            <input type="radio" name="typer" value="city" class="mr-2">
-                            City
-                        </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="typer" value="landmark" class="mr-2">
-                            Landmark
-                        </label>
-                    </div>
-                    
-        
-                    <input type="text" placeholder="Landmark/City Name" name="first" class="p-2 rounded border border-gray-600">
-                    <input type="text" placeholder="Type/Country" name="second" class="p-2 rounded border border-gray-600">
-                    <input type="number" placeholder="CityID/Population" name="third"  class="p-2 rounded border border-gray-600">
-        
-                    <button type="submit" class="h-10 w-full bg-slate-500 text-white rounded hover:bg-slate-600 transition">Submit</button>
-                    </form>
+            <h2 class="text-center text-xl font-semibold mb-6">Admin Forms</h2>
+    
+            <form action="/admin/add" method="post" class="mb-6">
+                <h3 class="text-center mb-4">Add a City/Landmark</h3>
+                <input type="password" name="password" placeholder="Admin Password" required class="p-2 rounded border border-gray-600 mb-4 w-full">
+                <div class="flex mb-4 justify-center">
+                    <label class="flex items-center mr-4">
+                        <input type="radio" name="typer" value="city" class="mr-2">
+                        City
+                    </label>
+                    <label class="flex items-center">
+                        <input type="radio" name="typer" value="landmark" class="mr-2">
+                        Landmark
+                    </label>
                 </div>
-                <form action="admin/delete" method="post">
-                    <h3 class="text-center">Delete a City/Landmark</h3>
-                    <input type="password" name="password" placeholder="Admin Password" required class="p-2 rounded border border-gray-600">
-                    <input type="text" placeholder="Landmark/City ID" name="id" class="p-2 rounded border border-gray-600">
-                    <div class="flex space-x-4 mb-4">
-                        <label class="flex items-center">
-                            <input type="radio" name="typer" value="city" class="mr-2">
-                            City
-                        </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="typer" value="landmark" class="mr-2">
-                            Landmark
-                        </label>
-                    </div>
-                    <button type="submit" class="h-10 w-full bg-slate-500 text-white rounded hover:bg-slate-600 transition">Delete</button>
-                </form>
+                <input type="text" placeholder="Landmark/City Name" name="first" class="p-2 rounded border border-gray-600 mb-4 w-full">
+                <input type="text" placeholder="Type/Country" name="second" class="p-2 rounded border border-gray-600 mb-4 w-full">
+                <input type="number" placeholder="CityID/Population" name="third" class="p-2 rounded border border-gray-600 mb-4 w-full">
+                <button type="submit" class="h-10 w-full bg-slate-500 text-white rounded hover:bg-slate-600 transition">Add</button>
+            </form>
+    
+            <form action="admin/delete" method="post" class="mb-6">
+                <h3 class="text-center mb-4">Delete a City/Landmark</h3>
+                <input type="password" name="password" placeholder="Admin Password" required class="w-full p-2 rounded border border-gray-600 mb-4">
+                <div class="flex mb-4 justify-center">
+                    <label class="flex items-center mr-4">
+                        <input type="radio" name="typer" value="city" class="mr-2">
+                        City
+                    </label>
+                    <label class="flex items-center">
+                        <input type="radio" name="typer" value="landmark" class="mr-2">
+                        Landmark
+                    </label>
+                </div>
+                <input type="text" placeholder="Landmark/City ID" name="id" class="w-full p-2 rounded border border-gray-600 mb-4">
+                <button type="submit" class="h-10 w-full bg-slate-500 text-white rounded hover:bg-slate-600 transition">Delete</button>
+            </form>
+    
+            <form action="admin/edit" method="post">
+                <h3 class="text-center mb-4">Edit a City/Landmark</h3>
+                <input type="password" name="password" placeholder="Admin Password" required class="w-full p-2 rounded border border-gray-600 mb-4">
+                <div class="flex mb-4 justify-center">
+                    <label class="flex items-center mr-4">
+                        <input type="radio" name="typer" value="city" class="mr-2">
+                        City
+                    </label>
+                    <label class="flex items-center">
+                        <input type="radio" name="typer" value="landmark" class="mr-2">
+                        Landmark
+                    </label>
+                </div>
+                <input type="number" placeholder="Landmark/City ID" name="id" class="my-4 w-full p-2 rounded border border-gray-600 mb-4">                <input type="text" placeholder="Landmark/City Name" name="first" class="p-2 rounded border border-gray-600 mb-4 w-full">
+                <input type="text" placeholder="Type/Country" name="second" class="p-2 rounded border border-gray-600 mb-4 w-full">
+                <input type="number" placeholder="CityID/Population" name="third" class="p-2 rounded border border-gray-600 mb-4 w-full">
+                <button type="submit" class="h-10 w-full bg-slate-500 text-white rounded hover:bg-slate-600 transition">Edit</button>
+            </form>
         </div>
     </section>
+    
     
 
 
